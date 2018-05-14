@@ -1,0 +1,148 @@
+Documentación API 
+
+
+/**--------------------------------------------------------------------
+|*CRUD PRODUCTOS
+|*
+|*
+*/
+obtener producto
+get('/products/{id}')
+//crear product
+post('/products')
+//devuelve todas las product
+get('/products')
+//Actualizr product
+put('/products/{id}')
+//Borra product
+delete('/products/{id}');
+//Obtiene categoría
+get('/products/{id}/category/')
+
+
+/**--------------------------------------------------------------------
+|*CRUD USERS
+|*
+|*
+*/
+//devuelve users por id
+('/users/{id}');
+//crea users
+('/users');
+//devuelve todas las users
+('/users',);
+//Actualizr users
+('/users/{id}');
+//Borra users
+('/users/{id}');
+
+
+/**--------------------------------------------------------------------
+|*CRUD CATEGORIES
+|*
+|*
+*/
+//devuelve category por id
+('/categories/{id}');
+//crea category
+('/categories');
+//devuelve todas las categorías
+('/categories');
+//Actualizr category
+('/categories/{id}');
+//Borra category
+('/categories/{id}');
+
+
+
+/**--------------------------------------------------------------------
+|*CRUD SALES
+|*
+|*
+*/
+//devuelve sale (user-product relationship) por id
+('/sales/{id}');
+//crea sale (user-product relationship)
+('/sales',);
+//devuelve todas las sale (user-product relationship)
+('/sales');
+//Actualizr sale (user-product relationship)
+('/sales/{id}');
+//Borra sale (user-product relationship)
+('/sales/{id}');
+
+
+/**--------------------------------------------------------------------
+|*CRUD PROVIDERS
+|*
+|*
+*/
+//devuelve provider por id
+('/providers/{id}');
+//crea provider
+('/providers');
+//devuelve todas las provider
+('/providers');
+//Actualizr provider
+('/providers/{id}');
+//Borra provider
+('/providers/{id}');
+
+
+
+/**--------------------------------------------------------------------
+|*CRUD ROL
+|*
+|*
+*/
+//devuelve rol por id
+('/roles/{id}');
+//crea rol
+('/roles');
+//devuelve todas las rol
+('/roles');
+//Actualizr rol
+('/roles/{id}');
+//Borra rol
+('/roles/{id}');
+
+
+
+/**--------------------------------------------------------------------
+|*CRUD USERROL
+|*
+|*
+*/
+//devuelve role-user relationship por id
+('/role-user/{id}');
+//crea role-user relationship
+('/role-user');
+//devuelve todas las user-rol relationship
+('/role-user');
+//Actualizr role-user relationship
+('/role-user/{id}');
+//Borra role-user relationship
+('/role-user/{id}');
+
+
+
+/**--------------------------------------------------------------------
+|*CRUD ProductProvider
+|*
+|*
+*/
+//devuelve product-provider relationship por id
+('/products-providers/{id}');
+//crea product-provider relationship
+('/products-providers');
+//devuelve todas las product-provider relationship
+('/products-providers');
+//Actualizr product-provider relationship
+('/products-providers/{id}');
+//Borra product-provider relationship
+('/products-providers/{id}');
+
+
+
+
+
