@@ -10,6 +10,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -19,15 +20,23 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductProviderController;
 use App\Http\Controllers\RoleUserController;
 use App\Http\Controllers\RoleController;
+use MongoDB\Client as Mongo;
 
 
 
 
 $router->post('/users/login', 'UserController@getToken');
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+
+$router->get('/mongo', function(Request $request) {
+    $collection = (new Mongo)->mydatabase->mycollection;
+    return $collection->find()->toArray();
 });
+
+/*Route::get('/mongo', function(Request $request) {
+    $collection = Mongo::get()->mydatabase->mycollection;
+    return $collection->find()->toArray();
+});*/
 
 
 /**--------------------------------------------------------------------
@@ -180,3 +189,5 @@ $router->group(['middleware]' => 'auth'], function() use ($router) {
 
 
 });
+
+

@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('imagePath');
             $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
