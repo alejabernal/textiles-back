@@ -29,8 +29,8 @@ class UsersController extends Controller
     public function show($id)
     {
         try {
-            $user = User::find($id)->roles()->orderBy('name')->get();
-
+            //$user = User::find($id)->roles()->orderBy('name')->get();
+            $user = User::find($id);
             if($user){
             return response()->json($user, 200);   
           }  

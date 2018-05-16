@@ -40,6 +40,43 @@ $router->get('/mongo', function(Request $request) {
 
 
 /**--------------------------------------------------------------------
+|*CRUD USERS
+|*
+|*
+*/
+//devuelve users por id
+$router->get('/users/{id}', 'UsersController@show');
+//crea users
+$router->post('/users', 'UsersController@create');
+//devuelve todas las users
+$router->get('/users', 'UsersController@index');
+//Actualizr users
+$router->put('/users/{id}', 'UsersController@update');
+//Borra users
+$router->delete('/users/{id}', 'UsersController@delete');
+
+
+
+
+
+$router->group(['middleware]' => 'auth'], function() use ($router) {
+
+			/**--------------------------------------------------------------------
+		|*CRUD ProductProvider
+		|*
+		|*
+		*/
+		//devuelve product-provider relationship por id
+		$router->get('/products-providers/{id}', 'ProductProviderController@show');
+		//crea product-provider relationship
+		$router->post('/products-providers', 'ProductProviderController@create');
+		//devuelve todas las product-provider relationship
+		$router->get('/products-providers', 'ProductProviderController@index');
+		//Actualizr product-provider relationship
+		$router->put('/products-providers/{id}', 'ProviderController@update');
+		//Borra product-provider relationship
+		$router->delete('/products-providers/{id}', 'ProductProviderController@delete');
+		/**--------------------------------------------------------------------
 |*CRUD PRODUCTOS
 |*
 |*
@@ -58,21 +95,6 @@ $router->delete('/products/{id}', 'ProductController@delete');
 $router->get('/products/{id}/category/', 'ProductController@getCategory');
 
 
-/**--------------------------------------------------------------------
-|*CRUD USERS
-|*
-|*
-*/
-//devuelve users por id
-$router->get('/users/{id}', 'UsersController@show');
-//crea users
-$router->post('/users', 'UsersController@create');
-//devuelve todas las users
-$router->get('/users', 'UsersController@index');
-//Actualizr users
-$router->put('/users/{id}', 'UsersController@update');
-//Borra users
-$router->delete('/users/{id}', 'UsersController@delete');
 
 
 
@@ -167,25 +189,6 @@ $router->put('/role-user/{id}', 'RoleUserController@update');
 $router->delete('/role-user/{id}', 'RoleUserController@delete');
 
 
-
-
-$router->group(['middleware]' => 'auth'], function() use ($router) {
-
-			/**--------------------------------------------------------------------
-		|*CRUD ProductProvider
-		|*
-		|*
-		*/
-		//devuelve product-provider relationship por id
-		$router->get('/products-providers/{id}', 'ProductProviderController@show');
-		//crea product-provider relationship
-		$router->post('/products-providers', 'ProductProviderController@create');
-		//devuelve todas las product-provider relationship
-		$router->get('/products-providers', 'ProductProviderController@index');
-		//Actualizr product-provider relationship
-		$router->put('/products-providers/{id}', 'ProviderController@update');
-		//Borra product-provider relationship
-		$router->delete('/products-providers/{id}', 'ProductProviderController@delete');
 
 
 });
