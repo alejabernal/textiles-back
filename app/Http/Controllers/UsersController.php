@@ -29,8 +29,8 @@ class UsersController extends Controller
     public function show($id)
     {
         try {
-            $user = User::find($id)->roles()->orderBy('name')->get();
-
+            //$user = User::find($id)->roles()->orderBy('name')->get();
+            $user = User::find($id);
             if($user){
             return response()->json($user, 200);   
           }  
@@ -56,6 +56,7 @@ class UsersController extends Controller
         $user->username=$request->input('username');
         $user->email=$request->input('email');
         $user->password=Hash::make($request->input('password'));
+        $user->api_token = str_random(60);
 
         try{
             if($user->save()){
@@ -147,20 +148,27 @@ class UsersController extends Controller
     }
 
     public function getToken(Request $request){
+
         if($request->isJson()){
             try {
-                 $data = $request->json()->all();
-                 $user = User::where('username', $data['username'])->fist();
+                 $username = $request->input("username");
+                 $password = $request->input("password");
+                 //return response()->json([$data, 404]);
+                 $user = User::where('username', $username)->first();
 
-                 if ($user && Hash::check($data['password'], $user->password)) {
-                        return response()->json($user, 200);
+
+                 if ($user && Hash::check($password, $user->password)) {
+                        return response()->json($user, 210);
                     }else{
-                        return response()->json(['erro'=>'No content'], 404);
+                        return response()->json(['error'=>'No content'], 404);
                     }   
             } catch (ModelNottryFoundException $e) {
-               return response()->json(['erro'=>'No content'], 404);
+               return response()->json(['error'=>'Unauthorized'], 401);
             }
         }
     }
+
+
+
 
 }

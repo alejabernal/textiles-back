@@ -2,10 +2,10 @@
 
 namespace App;
 
-//use Illuminate\Database\Eloquent\Model;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Category extends Eloquent
+
+class Category extends Model
 {
     /**
      * The connection name for the model.
