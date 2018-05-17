@@ -3,12 +3,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Bill;
 use Illuminate\Http\Request;
 use App\Http\Controllers; 
-use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class BillController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -18,20 +17,19 @@ class CategoryController extends Controller
 
 
     /**
-     *Retorna un category dado un id
+     *Retorna un bill dado un id
      *
      *@param $id
      *
-     *@return category;
+     *@return bill;
      */
     public function show($id)
     {
        try {
+         $bill = Bill::find($id);
          
-         $category = Category::find($id);
-         
-        if($category){
-            return response()->json($category, 200);    
+        if($bill){
+            return response()->json($bill, 200);    
         }
            
        } catch (Exception $e) {
@@ -43,7 +41,7 @@ class CategoryController extends Controller
     }
 
     /**
-     *Crea un category
+     *Crea un bill
      *
      *@param $Request
      *
@@ -52,10 +50,13 @@ class CategoryController extends Controller
 
      public function create(Request $request)
     {
-        $category = new Category();
-        $category->name=$request->input('name');
+        $bill = new Bill();
+        $bill->total=$request->input('total');
+        $bill->custom_id=$request->input('custom_id');
+        $bill->custom=$request->input('custom');
+        $bill->user_id=$request->input('user_id');
 
-        if($category->save()){
+        if($bill->save()){
             return response()->json([],201);
         }else{
             return response()->json([],500);
@@ -67,15 +68,14 @@ class CategoryController extends Controller
      *
      *@param void;
      *
-     *@return Category<>;
+     *@return Bill<>;
      */
 
      public function index(){
         try {
-            $categories = Category::all();
-            //$categories = DB::table('categories')->paginate(3);
-            if($categories){
-                return response()->json($categories, 200);
+            $roles = Bill::all();
+            if($roles){
+                return response()->json($roles, 200);
             }
         } catch (Exception $e) {
             return response()->json([], 404);
@@ -84,7 +84,7 @@ class CategoryController extends Controller
     }
 
     /**
-     *Crea un category
+     *Crea un bill
      *
      *@param $Request, $id
      *
@@ -93,11 +93,14 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id){
         try {
-            $category = Category::find($id);
-            if($category){
-                $category->name=$request->input('name');
+            $bill = Bill::find($id);
+            if($bill){
+                 $bill->total=$request->input('total');
+                 $bill->custom_id=$request->input('custom_id');
+                 $bill->custom=$request->input('custom');
+                 $bill->user_id=$request->input('user_id');
 
-                if ($category->save()) {
+                if ($bill->save()) {
                     return response()->json([],201);
                 }
                 
@@ -108,7 +111,7 @@ class CategoryController extends Controller
     }
 
     /**
-     *Crea un category
+     *Crea un bill
      *
      *@param $id
      *
@@ -117,8 +120,8 @@ class CategoryController extends Controller
 
     public function delete($id){
         try {
-            $category = Category::find($id);
-            if($category->delete()){
+            $bill = Bill::find($id);
+            if($bill->delete()){
                 return response()->json([],201);
             }
         } catch (Exception $e) {

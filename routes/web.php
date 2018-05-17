@@ -14,12 +14,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductUserController;
+use App\Http\Controllers\BillProductController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductProviderController;
 use App\Http\Controllers\RoleUserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\BillController;
+
+
+
 use MongoDB\Client as Mongo;
 
 
@@ -126,15 +130,34 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 		|*
 		*/
 		//devuelve sale (user-product relationship) por id
-		$router->get('/sales/{id}', 'ProductUserController@show');
+		$router->get('/sales/{id}', 'BillProductController@show');
 		//crea sale (user-product relationship)
-		$router->post('/sales', 'ProductUserController@create');
+		$router->post('/sales', 'BillProductController@create');
 		//devuelve todas las sale (user-product relationship)
-		$router->get('/sales', 'ProductUserController@index');
+		$router->get('/sales', 'BillProductController@index');
 		//Actualizr sale (user-product relationship)
-		$router->put('/sales/{id}', 'ProductUserController@update');
+		$router->put('/sales/{id}', 'BillProductController@update');
 		//Borra sale (user-product relationship)
-		$router->delete('/sales/{id}', 'ProductUserController@delete');
+		$router->delete('/sales/{id}', 'BillProductController@delete');
+
+
+
+		/**--------------------------------------------------------------------
+		|*CRUD BILL
+		|*
+		|*
+		*/
+		//devuelve sale (user-product relationship) por id
+		$router->get('/sales/{id}', 'BillController@show');
+		//crea sale (user-product relationship)
+		$router->post('/sales', 'BillController@create');
+		//devuelve todas las sale (user-product relationship)
+		$router->get('/sales', 'BillController@index');
+		//Actualizr sale (user-product relationship)
+		$router->put('/sales/{id}', 'BillController@update');
+		//Borra sale (user-product relationship)
+		$router->delete('/sales/{id}', 'BillController@delete');
+
 
 
 		/**--------------------------------------------------------------------

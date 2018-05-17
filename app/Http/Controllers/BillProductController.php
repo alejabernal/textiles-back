@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductUser;
+use App\BillProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
 
 
 
-class ProductUserController extends Controller
+class BillProductController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,18 +17,18 @@ class ProductUserController extends Controller
      */
 
     /**
-     *Retorna un saleo dado un id
+     *Retorna un billProducto dado un id
      *
      *@param $id
      *
-     *@return ProductUser;
+     *@return BillProduct;
      */
     public function show($id)
     {
         try {
-            $sale = ProductUser::find($id);
-            if($sale){
-            return response()->json($sale, 200);   
+            $billProduct = BillProduct::find($id);
+            if($billProduct){
+            return response()->json($billProduct, 200);   
           }  
         } catch (Exception $e) {
              return respose()->json([], 404);
@@ -38,7 +38,7 @@ class ProductUserController extends Controller
     }
 
     /**
-     *Crea un saleo
+     *Crea un billProducto
      *
      *@param $Request
      *
@@ -47,16 +47,14 @@ class ProductUserController extends Controller
 
      public function create(Request $request)
     {
-        $sale = new ProductUser();
-        $sale->users_id=$request->input('users_id');
-        $sale->products_id=$request->input('products_id');
-        $sale->quantitySold=$request->input('quantitySold');
-        $sale->totalPrice=$request->input('totalPrice');
-        $sale->custom=$request->input('custom');
-        $sale->custom_id=$request->input('custom_id');
-
+        $billProduct = new BillProduct();
+        $billProduct->bill_id=$request->input('bill_id');
+        $billProduct->product_id=$request->input('product_id');
+        $billProduct->total=$request->input('total');
+        $billProduct->status=$request->input('status');
+       
         try{
-            if($sale->save()){
+            if($billProduct->save()){
                 return response()->json([],201);
             }
         } catch(Exception $e){
@@ -67,9 +65,9 @@ class ProductUserController extends Controller
 
    public function index(){
         try {
-            $sales = ProductUser::all();
-            if($sales){
-                return response()->json($sales, 200);
+            $billProducts = BillProduct::all();
+            if($billProducts){
+                return response()->json($billProducts, 200);
             }
         } catch (Exception $e) {
             return response()->json([], 404);
@@ -78,7 +76,7 @@ class ProductUserController extends Controller
     }
 
     /**
-     *Crea un sale
+     *Crea un billProduct
      *
      *@param $Request, $id
      *
@@ -87,11 +85,14 @@ class ProductUserController extends Controller
 
     public function update(Request $request, $id){
         try {
-            $sale = ProductUser::find($id);
-            if($sale){
-                $sale->name=$request->input('name');
+            $billProduct = BillProduct::find($id);
+            if($billProduct){
+               $billProduct->bill_id=$request->input('bill_id');
+               $billProduct->product_id=$request->input('product_id');
+               $billProduct->total=$request->input('total');
+               $billProduct->status=$request->input('status');
 
-                if ($sale->save()) {
+                if ($billProduct->save()) {
                     return response()->json([],201);
                 }
                 
@@ -102,7 +103,7 @@ class ProductUserController extends Controller
     }
 
     /**
-     *Crea un sale
+     *Crea un billProduct
      *
      *@param $id
      *
@@ -111,8 +112,8 @@ class ProductUserController extends Controller
 
     public function delete($id){
         try {
-            $sale = ProductUser::find($id);
-            if($sale->delete()){
+            $billProduct = BillProduct::find($id);
+            if($billProduct->delete()){
                 return response()->json([],201);
             }
         } catch (Exception $e) {
