@@ -64,9 +64,9 @@ $app->singleton(
 // ]);
 
 //:::::::Importante descomentar si necesita habilitar CORS
-// $app->middleware([
-// 	App\Http\Middleware\CorsMiddleware::class
-// ]);
+$app->middleware([
+	App\Http\Middleware\CorsMiddleware::class
+]);
 
 
 $app->routeMiddleware([
