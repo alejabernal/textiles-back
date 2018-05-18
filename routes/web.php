@@ -61,6 +61,21 @@ $router->put('/users/{id}', 'UsersController@update');
 $router->delete('/users/{id}', 'UsersController@delete');
 
 
+/**--------------------------------------------------------------------
+		|*CRUD ROL
+		|*
+		|*
+		*/
+		//devuelve rol por id
+		$router->get('/roles/{id}', 'RoleController@show');
+		//crea rol
+		$router->post('/roles', 'RoleController@create');
+		//devuelve todas las rol
+		$router->get('/roles', 'RoleController@index');
+		//Actualizr rol
+		$router->put('/roles/{id}', 'RoleController@update');
+		//Borra rol
+		$router->delete('/roles/{id}', 'RoleController@delete');
 
 
 
@@ -140,6 +155,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 		//Borra sale (user-product relationship)
 		$router->delete('/sales/{id}', 'BillProductController@delete');
 
+		$router->post('/bill2', 'BillController@lastBill');
+
 
 
 		/**--------------------------------------------------------------------
@@ -148,15 +165,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 		|*
 		*/
 		//devuelve sale (user-product relationship) por id
-		$router->get('/sales/{id}', 'BillController@show');
+		$router->get('/bill/{id}', 'BillController@show');
 		//crea sale (user-product relationship)
-		$router->post('/sales', 'BillController@create');
+		$router->post('/bill', 'BillController@create');
 		//devuelve todas las sale (user-product relationship)
-		$router->get('/sales', 'BillController@index');
+		$router->get('/bill', 'BillController@index');
 		//Actualizr sale (user-product relationship)
-		$router->put('/sales/{id}', 'BillController@update');
+		$router->put('/bill/{id}', 'BillController@update');
 		//Borra sale (user-product relationship)
-		$router->delete('/sales/{id}', 'BillController@delete');
+		$router->delete('/bill/{id}', 'BillController@delete');
 
 
 
@@ -177,23 +194,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 		$router->delete('/providers/{id}', 'ProviderController@delete');
 
 
-
-
-		/**--------------------------------------------------------------------
-		|*CRUD ROL
-		|*
-		|*
-		*/
-		//devuelve rol por id
-		$router->get('/roles/{id}', 'RoleController@show');
-		//crea rol
-		$router->post('/roles', 'RoleController@create');
-		//devuelve todas las rol
-		$router->get('/roles', 'RoleController@index');
-		//Actualizr rol
-		$router->put('/roles/{id}', 'RoleController@update');
-		//Borra rol
-		$router->delete('/roles/{id}', 'RoleController@delete');
 
 
 		/**--------------------------------------------------------------------

@@ -3,11 +3,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Bill;
 use Illuminate\Http\Request;
 use App\Http\Controllers; 
 
-class RoleController extends Controller
+class BillController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,19 +17,19 @@ class RoleController extends Controller
 
 
     /**
-     *Retorna un rol dado un id
+     *Retorna un bill dado un id
      *
      *@param $id
      *
-     *@return rol;
+     *@return bill;
      */
     public function show($id)
     {
        try {
-         $rol = Role::find($id);
+         $bill = Bill::find($id);
          
-        if($rol){
-            return response()->json($rol, 200);    
+        if($bill){
+            return response()->json($bill, 200);    
         }
            
        } catch (Exception $e) {
@@ -41,7 +41,7 @@ class RoleController extends Controller
     }
 
     /**
-     *Crea un rol
+     *Crea un bill
      *
      *@param $Request
      *
@@ -50,13 +50,26 @@ class RoleController extends Controller
 
      public function create(Request $request)
     {
-        $rol = new Role();
-        $rol->name=$request->input('name');
+        $bill = new Bill();
+        $bill->total=$request->input('total');
+        $bill->status=$request->input('status');
+        $bill->tmp=$request->input('tmp');
+        $bill->custom_id=$request->input('custom_id');
+        $bill->custom=$request->input('custom');
+        $bill->user_id=$request->input('user_id');
 
-        if($rol->save()){
+        if($bill->save()){
+
             return response()->json([],201);
         }else{
             return response()->json([],500);
+        }
+    }
+
+    public function lastBill(Request $request){
+        $bill = Bill::where('tmp', $request -> input('tmp'))->first();
+        if($bill){
+            return response()->json($bill, 200);
         }
     }
 
@@ -65,12 +78,12 @@ class RoleController extends Controller
      *
      *@param void;
      *
-     *@return Role<>;
+     *@return Bill<>;
      */
 
      public function index(){
         try {
-            $roles = Role::all();
+            $roles = Bill::all();
             if($roles){
                 return response()->json($roles, 200);
             }
@@ -81,7 +94,7 @@ class RoleController extends Controller
     }
 
     /**
-     *Crea un rol
+     *Crea un bill
      *
      *@param $Request, $id
      *
@@ -90,11 +103,14 @@ class RoleController extends Controller
 
     public function update(Request $request, $id){
         try {
-            $rol = Role::find($id);
-            if($rol){
-                $rol->name=$request->input('name');
+            $bill = Bill::find($id);
+            if($bill){
+                 $bill->total=$request->input('total');
+                 $bill->custom_id=$request->input('custom_id');
+                 $bill->custom=$request->input('custom');
+                 $bill->user_id=$request->input('user_id');
 
-                if ($rol->save()) {
+                if ($bill->save()) {
                     return response()->json([],201);
                 }
                 
@@ -105,7 +121,7 @@ class RoleController extends Controller
     }
 
     /**
-     *Crea un rol
+     *Crea un bill
      *
      *@param $id
      *
@@ -114,8 +130,8 @@ class RoleController extends Controller
 
     public function delete($id){
         try {
-            $rol = Role::find($id);
-            if($rol->delete()){
+            $bill = Bill::find($id);
+            if($bill->delete()){
                 return response()->json([],201);
             }
         } catch (Exception $e) {

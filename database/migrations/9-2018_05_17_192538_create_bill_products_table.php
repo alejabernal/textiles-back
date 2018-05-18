@@ -16,7 +16,7 @@ class CreateBillProductsTable extends Migration
         Schema::create('bill_products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('total');
-            $table->string('status');
+            $table->integer('amount');
             $table->unsignedInteger('bill_id');
             $table->unsignedInteger('product_id');
             $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BillProduct;
+use App\Bill;
 use Illuminate\Http\Request;
 use App\Http\Controllers;
 
@@ -47,11 +48,14 @@ class BillProductController extends Controller
 
      public function create(Request $request)
     {
+
+
         $billProduct = new BillProduct();
         $billProduct->bill_id=$request->input('bill_id');
         $billProduct->product_id=$request->input('product_id');
         $billProduct->total=$request->input('total');
         $billProduct->status=$request->input('status');
+        $bill->amount=$request->input('amount');
        
         try{
             if($billProduct->save()){

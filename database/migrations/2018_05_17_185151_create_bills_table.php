@@ -18,6 +18,8 @@ class CreateBillsTable extends Migration
             $table->integer('total');
             $table->string('custom');
             $table->string('custom_id');
+            $table->string('status');
+            $table->string('tmp');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');   
             $table->timestamps();
