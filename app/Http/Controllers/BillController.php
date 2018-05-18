@@ -53,24 +53,31 @@ class BillController extends Controller
         $bill = new Bill();
         $bill->total=$request->input('total');
         $bill->status=$request->input('status');
+        $bill->typePay=$request->input('typePay');
         $bill->tmp=$request->input('tmp');
         $bill->custom_id=$request->input('custom_id');
         $bill->custom=$request->input('custom');
         $bill->user_id=$request->input('user_id');
 
         if($bill->save()){
+           // $id_bill = Bill::selectMaxId('id')->orderBy('create_at', 'DESC')->first()           
 
-            return response()->json([],201);
+            return response()->json($bill,201);
         }else{
             return response()->json([],500);
         }
     }
 
-    public function lastBill(Request $request){
-        $bill = Bill::where('tmp', $request -> input('tmp'))->first();
+    public function lastBill(){
+        $bill = Bill::orderBy('created_at', 'DESC')->first();
+        //$bill->tmp = 'none';
+        //$bill->save();
         if($bill){
             return response()->json($bill, 200);
+        }else{
+            return response()->json([], 404);
         }
+
     }
 
     /**
@@ -106,6 +113,7 @@ class BillController extends Controller
             $bill = Bill::find($id);
             if($bill){
                  $bill->total=$request->input('total');
+                 $bill->typePay=$request->input('typePay');
                  $bill->custom_id=$request->input('custom_id');
                  $bill->custom=$request->input('custom');
                  $bill->user_id=$request->input('user_id');

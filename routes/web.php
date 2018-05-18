@@ -155,7 +155,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 		//Borra sale (user-product relationship)
 		$router->delete('/sales/{id}', 'BillProductController@delete');
 
-		$router->post('/bill2', 'BillController@lastBill');
+		$router->get('/bill2', 'BillController@lastBill');
 
 
 
