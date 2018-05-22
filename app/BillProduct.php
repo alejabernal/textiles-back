@@ -12,4 +12,21 @@ class BillProduct extends Model
      * @var string
      */
    // protected $connection = 'connection-name';
+
+    public $products;
+
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product');
+    }
+
+    public function bill()
+    {
+        return $this->belongsTo('App\Bill');
+    }
+
+
+
+
 }

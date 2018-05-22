@@ -21,6 +21,7 @@ use App\Http\Controllers\ProductProviderController;
 use App\Http\Controllers\RoleUserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\BillController;
+use  App\Http\Controllers\NegativeSoldController;
 
 
 
@@ -76,6 +77,24 @@ $router->delete('/users/{id}', 'UsersController@delete');
 		$router->put('/roles/{id}', 'RoleController@update');
 		//Borra rol
 		$router->delete('/roles/{id}', 'RoleController@delete');
+
+
+		/**--------------------------------------------------------------------
+		|*CRUD ROL
+		|*
+		|*
+		*/
+		//devuelve rol por id
+		$router->get('/api/{id}', 'NegativeSoldController@show');
+		//crea rol
+		$router->post('/api', 'NegativeSoldController@create');
+		//devuelve todas las rol
+		$router->get('/api', 'NegativeSoldController@index');
+		//Actualizr rol
+		$router->put('/api/{id}', 'NegativeSoldController@update');
+		//Borra rol
+		$router->delete('/api/{id}', 'NegativeSoldController@delete');
+
 
 
 
@@ -149,11 +168,15 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 		//crea sale (user-product relationship)
 		$router->post('/sales', 'BillProductController@create');
 		//devuelve todas las sale (user-product relationship)
-		$router->get('/sales', 'BillProductController@index');
+		$router->get('/sales', 'BillProductController@index2');
 		//Actualizr sale (user-product relationship)
 		$router->put('/sales/{id}', 'BillProductController@update');
 		//Borra sale (user-product relationship)
 		$router->delete('/sales/{id}', 'BillProductController@delete');
+		//Product of sale
+		$router->get('/sales/{id}/product', 'BillProductController@getProduct');
+		//Bill of product
+		$router->get('/sales/{id}/bill', 'BillProductController@getProduct');
 
 		$router->get('/bill2', 'BillController@lastBill');
 

@@ -130,4 +130,24 @@ class BillProductController extends Controller
         }
     }
 
+    public function getProduct($id){
+        $sale = BillProduct::find($id)->product;
+        return response()->json($sale, 200);
+    }
+
+    public function getBill($id){
+        $sale = BillProduct::find($id)->bill;
+        return response()->json($sale, 200);
+    }
+
+    public function index2(){
+        $sales = BillProduct::all();
+
+        foreach ($sales as $sale) {
+            $sale->products = $sale->product;
+        }
+
+        return response()->json($sales, 200);
+    }
+
 }
