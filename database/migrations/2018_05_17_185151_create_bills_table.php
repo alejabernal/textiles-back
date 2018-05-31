@@ -17,7 +17,7 @@ class CreateBillsTable extends Migration
             $table->increments('id');
             $table->integer('total')->nullable();
             $table->string('status')->nullable();
-            $table->string('tmp')->nullable();
+            $table->boolean('confirmed')->nullable();
             $table->string('typePay')->nullable();
             $table->string('custom')->nullable();
             $table->string('custom_id')->nullable();
