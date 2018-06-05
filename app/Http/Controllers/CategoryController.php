@@ -72,8 +72,8 @@ class CategoryController extends Controller
 
      public function index(){
         try {
-            //$categories = Category::all();
-            $categories = DB::table('categories')->paginate(3);
+            $categories = Category::all();
+            //$categories = DB::table('categories')->paginate(3);
             if($categories){
                 return response()->json($categories, 200);
             }

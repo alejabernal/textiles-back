@@ -15,14 +15,10 @@ class CreateProductUsersTable extends Migration
     {
         Schema::create('product_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('product_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');           
+            $table->unsignedInteger('product_id');        
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');           
             $table->string('quantitySold');
             $table->integer('totalPrice');
-            $table->string('custom');
-            $table->string('custom_id');
             $table->timestamps();
         });
     }

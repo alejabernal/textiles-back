@@ -3,11 +3,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+
+
+namespace App\Http\Controllers;
+
+use App\NegativeSold;
 use Illuminate\Http\Request;
 use App\Http\Controllers; 
+use Illuminate\Support\Facades\DB;
 
-class RoleController extends Controller
+class NegativeSoldController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,19 +22,19 @@ class RoleController extends Controller
 
 
     /**
-     *Retorna un rol dado un id
+     *Retorna un neg dado un id
      *
      *@param $id
      *
-     *@return rol;
+     *@return neg;
      */
     public function show($id)
     {
        try {
-         $rol = Role::find($id);
+         $neg = NegativeSold::find($id);
          
-        if($rol){
-            return response()->json($rol, 200);    
+        if($neg){
+            return response()->json($neg, 200);    
         }
            
        } catch (Exception $e) {
@@ -41,7 +46,7 @@ class RoleController extends Controller
     }
 
     /**
-     *Crea un rol
+     *Crea un neg
      *
      *@param $Request
      *
@@ -50,10 +55,10 @@ class RoleController extends Controller
 
      public function create(Request $request)
     {
-        $rol = new Role();
-        $rol->name=$request->input('name');
+        $nega = new NegativeSold;
+           
 
-        if($rol->save()){
+        if($neg->save()){
             return response()->json([],201);
         }else{
             return response()->json([],500);
@@ -65,14 +70,15 @@ class RoleController extends Controller
      *
      *@param void;
      *
-     *@return Role<>;
+     *@return NegativeSold<>;
      */
 
      public function index(){
         try {
-            $roles = Role::all();
-            if($roles){
-                return response()->json($roles, 200);
+           $nega = DB::connection('mongodb')->select('ventas_n');
+           
+            if($nega){
+                return response()->json($nega, 200);
             }
         } catch (Exception $e) {
             return response()->json([], 404);
@@ -81,7 +87,7 @@ class RoleController extends Controller
     }
 
     /**
-     *Crea un rol
+     *Crea un neg
      *
      *@param $Request, $id
      *
@@ -90,11 +96,11 @@ class RoleController extends Controller
 
     public function update(Request $request, $id){
         try {
-            $rol = Role::find($id);
-            if($rol){
-                $rol->name=$request->input('name');
+            $neg = NegativeSold::find($id);
+            if($neg){
+                $neg->name=$request->input('name');
 
-                if ($rol->save()) {
+                if ($neg->save()) {
                     return response()->json([],201);
                 }
                 
@@ -105,7 +111,7 @@ class RoleController extends Controller
     }
 
     /**
-     *Crea un rol
+     *Crea un neg
      *
      *@param $id
      *
@@ -114,8 +120,8 @@ class RoleController extends Controller
 
     public function delete($id){
         try {
-            $rol = Role::find($id);
-            if($rol->delete()){
+            $neg = NegativeSold::find($id);
+            if($neg->delete()){
                 return response()->json([],201);
             }
         } catch (Exception $e) {
@@ -123,3 +129,4 @@ class RoleController extends Controller
         }
     }
 }
+

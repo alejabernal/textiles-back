@@ -2,12 +2,9 @@
 
 namespace App;
 
-use App\Category;
-
-
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class BillProduct extends Model
 {
     /**
      * The connection name for the model.
@@ -16,12 +13,20 @@ class Product extends Model
      */
    // protected $connection = 'connection-name';
 
+    public $products;
 
-    
-   public function category()
+
+    public function product()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Product');
     }
+
+    public function bill()
+    {
+        return $this->belongsTo('App\Bill');
+    }
+
+
 
 
 }

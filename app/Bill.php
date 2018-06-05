@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductProvider extends Model
+class Bill extends Model
 {
     /**
      * The connection name for the model.
@@ -12,4 +12,10 @@ class ProductProvider extends Model
      * @var string
      */
    // protected $connection = 'connection-name';
+
+
+    public function products()
+    {
+       // return $this->belongsToMany('App\User');
+    }
 }

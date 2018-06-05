@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use MongoDB\Client as Mongo;
 
-class ProductUser extends Model
+class Bill extends Model
 {
     /**
      * The connection name for the model.
@@ -12,4 +13,10 @@ class ProductUser extends Model
      * @var string
      */
    // protected $connection = 'connection-name';
+
+
+    public function products()
+    {
+       // return $this->belongsToMany('App\User');
+    }
 }
